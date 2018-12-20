@@ -139,7 +139,7 @@ public class AVLMethods {
         node=AVLMethods.insert(5,node);
         node=AVLMethods.insert(6,node);
         node=AVLMethods.remove(4,node);
-        System.out.println(node.getElement());
+        System.out.println(node.getHight());
 
     }
 }
