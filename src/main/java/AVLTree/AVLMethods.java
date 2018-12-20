@@ -70,7 +70,7 @@ public class AVLMethods {
     }
 
     private static AVLNode doubleWithLeft(AVLNode node){
-        node.setLift(rotateWithLeft(node.getLift()));
+        node.setLift(rotateWithRight(node.getLift()));
         return rotateWithLeft(node);
     }
 
@@ -88,7 +88,7 @@ public class AVLMethods {
 
     private static AVLNode doubleWithRight(AVLNode node){
         node.setRight(rotateWithLeft(node.getRight()));
-        return rotateWithLeft(node);
+        return rotateWithRight(node);
     }
 
     public static int compares(int comparator,int comparative){
