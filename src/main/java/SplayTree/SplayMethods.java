@@ -133,8 +133,9 @@ public class SplayMethods {
     }
 
     public static SplayTree splay(SplayTree node){
+        int node_flag=0;
         boolean flag=false;//lift=false  right=true;
-        while (node.getParent().getParent().getParent()!=null){
+        while (node_flag==0&&node.getParent().getParent().getParent()!=null){
             SplayTree temp=node.getParent().getParent().getParent();
             if (isLift(node.getParent().getParent())){
                 flag=false;
@@ -149,11 +150,37 @@ public class SplayMethods {
                 temp.setLift(node);
                 node.setParent(temp);
             }
+            if (node.getParent().getParent()==null){
+                node_flag=1;
+            }
 
 
         }
-        node=splayTree(node);
-        node.setParent(null);
+        if (node_flag!=1){
+            node=splayTree(node);
+            node.setParent(null);
+        }else {
+            if (isLift(node)){
+                SplayTree temp=node.getRight();
+                node.getParent().setLift(temp);
+                node.setRight(node.getParent());
+                node.getRight().setParent(node);
+                if (temp!=null){
+                    temp.setParent(node.getRight());
+                }
+                node.setParent(null);
+
+            }else {
+                SplayTree temp=node.getLift();
+                node.getParent().setRight(temp);
+                node.setLift(node.getParent());
+                node.getLift().setParent(node);
+                if (temp!=null){
+                    temp.setParent(node.getLift());
+                }
+                node.setParent(null);
+            }
+        }
 
         return node;
     }
@@ -201,7 +228,7 @@ public class SplayMethods {
         node=insert(3,node);
         node=insert(2,node);
         node=insert(1,node);
-        node=find(1,node);
+        node=find(2,node);
         System.out.println(node.getElement());
     }
 
