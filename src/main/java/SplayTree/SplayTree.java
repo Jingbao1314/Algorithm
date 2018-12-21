@@ -5,9 +5,18 @@ package SplayTree;
  * @date 18-12-20
  */
 public class SplayTree {
+    private SplayTree parent;
     private int element;
     private SplayTree right;
     private SplayTree lift;
+
+    public SplayTree getParent() {
+        return parent;
+    }
+
+    public void setParent(SplayTree parent) {
+        this.parent = parent;
+    }
 
     public int getElement() {
         return element;
