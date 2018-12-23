@@ -64,7 +64,7 @@ public class AVLMethods {
         node.setLift(temp.getRight());
         temp.setRight(node);
         node.setHight(Math.max(hight(node.getLift()),hight(node.getRight()))+1);
-        temp.setHight(Math.max(hight(temp.getLift()),node.getHight())+1);
+        temp.setHight(Math.max(hight(temp.getLift()),node .getHight())+1);
         return temp;
 
     }
@@ -126,7 +126,6 @@ public class AVLMethods {
             res=findMin(node.getLift());
         }
         return res;
-
     }
 
 
