@@ -221,7 +221,7 @@ public class QuadraticProbingHashTable <AnyType>{
 
         long endTime = System.currentTimeMillis( );
 
-        System.out.println( "运行时间" + (endTime - startTime) );
+        System.out.println( "运行时间:" + (endTime - startTime) );
     }
 
 }
