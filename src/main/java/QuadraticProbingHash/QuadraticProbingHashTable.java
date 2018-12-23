@@ -214,16 +214,14 @@ public class QuadraticProbingHashTable <AnyType>{
         QuadraticProbingHashTable<String> table = new QuadraticProbingHashTable<>
                 ( );
 
-
         long startTime = System.currentTimeMillis( );
 
-        System.out.println( "Checking... (no more output means success)" );
         System.out.println(table.insert("xxx"));
         System.out.println(table.contains("xxx"));
 
         long endTime = System.currentTimeMillis( );
 
-        System.out.println( "Elapsed time: " + (endTime - startTime) );
+        System.out.println( "运行时间" + (endTime - startTime) );
     }
 
 }
