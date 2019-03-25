@@ -8,6 +8,9 @@ import java.util.ArrayList;
  */
 public class LinkReverse
 {
+    /* *
+     *@describe 链表反转 使用栈来模拟递归过程
+     */
     public static void reverse(Node node){
         int flag=1;
         Node head=node;
