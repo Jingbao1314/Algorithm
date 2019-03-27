@@ -62,26 +62,38 @@ public class TreeSerialize {
 
 
     public static void main(String[] args) {
-        Node a=new Node("a");
-        Node b=new Node("b");
-        Node c=new Node("c");
-        Node d=new Node("d");
-        Node e=new Node("e");
-        Node f=new Node("f");
-        Node g=new Node("g");
-        a.left=b;
-        a.right=c;
-        b.left=d;
-        b.right=e;
-        c.left=f;
-        c.right=g;
-
+//        Node a=new Node("a");
+//        Node b=new Node("b");
+//        Node c=new Node("c");
+//        Node d=new Node("d");
+//        Node e=new Node("e");
+//        Node f=new Node("f");
+//        Node g=new Node("g");
+//        a.left=b;
+//        a.right=c;
+//        b.left=d;
+//        b.right=e;
+//        c.left=f;
+//        c.right=g;
+//        print(a,true);
 //        serialize(a);
 //        Solution solution=new Solution();
 //        System.out.println();
 //        serialize(solution.Deserialize(solution.Serialize(a)));
+        String[] pre={"1","2","4","7","3","5","6","8"};
+        String[] vin={"4","7","2","1","5","3","8","6"};
+        Node node=build(pre,vin);
+        prePrint(node);
 
-        print(a,true);
+    }
+
+    public static void prePrint(Node node){
+        if (node==null){
+            return;
+        }
+        System.out.println(node.ele);
+        prePrint(node.left);
+        prePrint(node.right);
 
     }
 
@@ -105,6 +117,67 @@ public class TreeSerialize {
         print(tree.left,false);
         print(tree.right,false);
 
+    }
+    /* *
+     *@describe 根据前序遍历,中序遍历的结果重建二叉树
+     */
+    public static Node build(String[] pre,String[] vin){
+        int root_flag=0;
+        for (int i=0;i<pre.length;i++){
+            if(pre[0]==vin[i]){
+                root_flag=i;
+                break;
+            }
+        }
+//        printList(pre);
+//        System.out.println();
+//        printList(vin);
+//        System.out.println();
+//        System.out.println(root_flag);
+        Node root=new Node(pre[0]);
+       if (pre.length>2){
+           if (root_flag!=0){
+               String[] pre_left=createList(pre,1,root_flag);
+               String[] vin_left=createList(vin,0,root_flag-1);
+               root.left=build(pre_left,vin_left);
+           }
+           if (root_flag!=vin.length-1){
+               String[] pre_right=createList(pre,root_flag+1,pre.length-1);
+               String[] vin_right=createList(vin,root_flag+1,vin.length-1);
+//               System.out.println("right");
+               root.right=build(pre_right,vin_right);
+           }
+       }else if (pre.length==2){
+//           System.out.println("------");
+           if (pre[0]==vin[0]){
+               root.right=new Node(pre[1]);
+           }else {
+               root.left=new Node(pre[1]);
+           }
+       }
+        return root;
+    }
+
+    private static void printList(String []list){
+        for (String ele:list) {
+            System.out.print(ele);
+
+        }
+
+    }
+    private static String[] createList(String[] list,int start,int end){
+//        printList(list);
+//        System.out.println("pre");
+//        System.out.println(start+"-----"+end);
+        String[] res=new String[end-start+1];
+        int flag=0;
+        for (int i=start;i<=end;i++){
+            res[flag]=list[i];
+            flag++;
+        }
+//        printList(res);
+//        System.out.println("res");
+        return res;
     }
 
 }
